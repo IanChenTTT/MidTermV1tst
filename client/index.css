@@ -1,0 +1,17 @@
+*::before
+*::after{
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+}
+body{
+    padding: 0;
+    margin: 0;
+    height: 100svh;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
