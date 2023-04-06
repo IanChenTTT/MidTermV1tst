@@ -1,5 +1,7 @@
 const {io} = require("socket.io-client");
-const socket = io("ws://localhost:3000");
+const socket = io("ws://localhost:3000",{
+    path: "/ChessRoom/"
+});
 // send a message to the server
 socket.emit("hello from client", 5, "6", { 7: Uint8Array.from([8]) },(res)=>{
     console.log(res);

@@ -6,7 +6,7 @@ const app = express();
 const httpServer = createServer(app);
 const path = require("path");
 const io = new Server(httpServer, {
-  /* options */
+    path: "/ChessRoom"
 });
 console.log(path.sep)
 console.log(path.join(__dirname,'..','client'))
