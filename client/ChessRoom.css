@@ -1,0 +1,47 @@
+*::after *::before {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  background-color: beige;
+}
+#root {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: cadetblue;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+#Back {
+  display: grid;
+  border-style: solid;
+  border-radius: 5px;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  z-index: -10;
+
+}
+#Front {
+  display: grid;
+  border-style: solid;
+  border-radius: 5px;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  position: absolute;
+  z-index: 10;
+}
+.ColorBlock {
+  background-color: #C5B1AA;
+}
+.WhiteBlocks {
+  background-color: #665B5A;
+}
