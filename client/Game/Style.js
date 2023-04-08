@@ -3,6 +3,8 @@ let image = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
   10, 10, 10, 10, 10, 10, 11, 12, 13, 14, 15, 13, 12, 11,
 ];
+const BoardUID = [["8a",'8b','8c',]
+]
 //Chess element start at 1 offset is +1
 // 1: Rook 2:Knight 3:Bishop 4: Queen 5:king 6 Pawn => Black
 // 10: Pawn 11:Rook 12:Knight 13:Bishop 14: Queen 15: King => white
@@ -12,22 +14,20 @@ let image = [
 
 //----------Back
 let JSel1 = document.querySelector("#Back");
-for (let i = 1, count = 1; i <= 64; i++) {
-  let TWblock = document.createElement("div");
-  TWblock.classList.add("WhiteBlocks");
-  let TBblock = document.createElement("div");
-  TBblock.classList.add("ColorBlock");
-  if (count > 16) count = 1;
-  if (count <= 8) {
-    if (i % 2 == 0) JSel1.appendChild(TBblock);
-    else JSel1.appendChild(TWblock);
-    count++;
-  } else if (count > 8) {
-    if (i % 2 == 0) JSel1.appendChild(TWblock);
-    else JSel1.appendChild(TBblock);
-    count++;
+let SwapBlock = -1;
+for (let y = 0; y < 8; y++) {
+
+  for (let x = 0; x < 8; x++,SwapBlock*=-1) 
+  {
+    let block = document.createElement("div")
+    SwapBlock === -1 ? 
+    block.classList.add("ColorBlock") :
+    block.classList.add("WhiteBlocks")
+    JSel1.append(block)
   }
+  SwapBlock *= -1;
 }
+
 //----------Front
 //60 div with drop id class
 //Chess piece id is image id
@@ -36,7 +36,7 @@ for (let i = 1, count = 1; i <= 64; i++) {
 let JSel2 = document.querySelector("#Front");
 for (let i = 1; i <= 64; i++) {
   let ChessJ = document.createElement(`div`);
-   ChessJ.classList.add(`Drop`,`${i}`);
+  ChessJ.classList.add(`Drop`, `${i}`);
   if (image[i] === 0) {
     JSel2.appendChild(ChessJ);
     continue;
