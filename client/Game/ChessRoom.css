@@ -45,3 +45,7 @@ body {
 .WhiteBlocks {
   background-color: #665B5A;
 }
+.ChessPiece{
+  background-repeat: no-repeat;
+  background-size: contain;
+}

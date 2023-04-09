@@ -1,10 +1,12 @@
+// import ChessPiece from "../../public/Util/BoardPiece";
+
 let image = [
-  0, 1, 2, 3, 4, 5, 3, 2, 1, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
-  10, 10, 10, 10, 10, 10, 11, 12, 13, 14, 15, 13, 12, 11,
+  [`BR`, `BN`, `BB`, `BQ`, `BK`, `BB`, `BN`, `BR`],
+  [`BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`],
+  [`WR`, `WN`, `WB`, `WQ`, `WK`, `WB`, `WN`, `WR`],
+  [`WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`],
 ];
-const BoardUID = [["8a",'8b','8c',]
-]
+const BoardUID = [["8a", "8b", "8c"]];
 //Chess element start at 1 offset is +1
 // 1: Rook 2:Knight 3:Bishop 4: Queen 5:king 6 Pawn => Black
 // 10: Pawn 11:Rook 12:Knight 13:Bishop 14: Queen 15: King => white
@@ -16,14 +18,12 @@ const BoardUID = [["8a",'8b','8c',]
 let JSel1 = document.querySelector("#Back");
 let SwapBlock = -1;
 for (let y = 0; y < 8; y++) {
-
-  for (let x = 0; x < 8; x++,SwapBlock*=-1) 
-  {
-    let block = document.createElement("div")
-    SwapBlock === -1 ? 
-    block.classList.add("ColorBlock") :
-    block.classList.add("WhiteBlocks")
-    JSel1.append(block)
+  for (let x = 0; x < 8; x++, SwapBlock *= -1) {
+    let block = document.createElement("div");
+    SwapBlock === -1
+      ? block.classList.add("ColorBlock")
+      : block.classList.add("WhiteBlocks");
+    JSel1.append(block);
   }
   SwapBlock *= -1;
 }
@@ -33,18 +33,33 @@ for (let y = 0; y < 8; y++) {
 //Chess piece id is image id
 //Chess Move detect by Move class
 
-let JSel2 = document.querySelector("#Front");
-for (let i = 1; i <= 64; i++) {
-  let ChessJ = document.createElement(`div`);
-  ChessJ.classList.add(`Drop`, `${i}`);
-  if (image[i] === 0) {
-    JSel2.appendChild(ChessJ);
-    continue;
+let JSel3 = document.querySelector("#Front");
+for (let y = 0; y < 2; y++) {
+  for (let x = 0; x < 8; x++) 
+  {
+    let ChessJ = document.createElement(`div`);
+    ChessJ.classList.add(`${y}_${x}`, `ChessPiece`,'CanDrag');
+    ChessJ.setAttribute("draggable","true");
+    ChessJ.style.backgroundImage = `url(../image/${image[y][x]}.svg)`;
+    JSel3.appendChild(ChessJ)
   }
-  ChessJ.classList.add(`ChessPiece${image[i]}`, `Move`);
-  // Set Attribute !!!!!
-  ChessJ.setAttribute("draggable", "true");
-  JSel2.appendChild(ChessJ);
-  //  let temp = "url(img/" + image[i] + ".png)"; Change teplate litrual
-  ChessJ.style.backgroundImage = `url(img/${image[i]}.png`;
+}
+for (let y = 2; y < 6; y++) {
+  for (let x = 0; x < 8; x++) 
+  {
+    let ChessJ = document.createElement(`div`);
+    ChessJ.classList.add(`${y}_${x}`);
+    JSel3.appendChild(ChessJ)
+  }
+}
+
+for (let y = 2, y1=6; y < 4 ,y1<8; y++,y1++) {
+  for (let x = 0; x < 8; x++) 
+  {
+    let ChessJ = document.createElement(`div`);
+    ChessJ.classList.add(`${y1}_${x}`, `ChessPiece`,'CanDrag');
+    ChessJ.setAttribute("draggable","true");
+    ChessJ.style.backgroundImage = `url(../image/${image[y][x]}.svg)`;
+    JSel3.appendChild(ChessJ)
+  }
 }
