@@ -10,7 +10,7 @@ class GameBoard extends ChessPiece {
     };
     this.Board_2Dobj = this.Board_2D().map((row) => {
       return row.map(function(cell){
-        return { [`${cell}`]: cell };
+        return { [`${cell}`]: '' };
       });
     });
     this.#Board_init = this.getBoard_2Dobj;
@@ -55,9 +55,27 @@ class GameBoard extends ChessPiece {
     this.#Board_init[7][5].f1 = 'B';
     this.#Board_init[7][6].g1 = 'N';
     this.#Board_init[7][7].h1 = 'R';
+    this.#Board_init[1][0].a7 = 'P'
+    this.#Board_init[1][1].b7 = 'P'
+    this.#Board_init[1][2].c7 = 'P'
+    this.#Board_init[1][3].d7 = 'P'
+    this.#Board_init[1][4].e7 = 'P'
+    this.#Board_init[1][5].f7 = 'P'
+    this.#Board_init[1][6].g7 = 'P'
+    this.#Board_init[1][7].h7 = 'P'
+    this.#Board_init[6][0].a2 = 'P'
+    this.#Board_init[6][1].b2 = 'P'
+    this.#Board_init[6][2].c2 = 'P'
+    this.#Board_init[6][3].d2 = 'P'
+    this.#Board_init[6][4].e2 = 'P'
+    this.#Board_init[6][5].f2 = 'P'
+    this.#Board_init[6][6].g2 = 'P'
+    this.#Board_init[6][7].h2 = 'P'
   }
   get getChess_Board() {
     return this.#Board_init;
   }
 }
+let test = new GameBoard();
+console.table(test.getChess_Board);
 module.exports = GameBoard;
