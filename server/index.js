@@ -29,12 +29,10 @@ app.all('*',(req,res)=>{
 // });
 io.on("connection", (socket) => {
   console.log("a user is connected", socket.id);
-  socket.on("ChessCORD",async (...arg)=>{
-    console.log(arg[0],arg[1])
-  //  PlayerGame.getTarget(arg).then((...resolve)=>{
-  //   console.log(resolve);
-  //  });
-    const result = await PlayerGame.getTarget(arg[0],arg[1]);
+  socket.on("ChessCORD",async (y,x)=>{
+    console.log(y,x)
+
+    const result = await PlayerGame.getTarget(y,x);
     console.log(result)
   })
 });

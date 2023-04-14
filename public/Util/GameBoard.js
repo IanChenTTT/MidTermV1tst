@@ -39,43 +39,43 @@ class GameBoard extends ChessPiece {
     return TempArr;
   }
    Initboard(){
-    this.#Board_init[0][0].a8 = 'R';
-    this.#Board_init[0][1].b8 = 'N';
-    this.#Board_init[0][2].c8 = 'B';
-    this.#Board_init[0][3].d8 = 'Q';
-    this.#Board_init[0][4].e8 = 'K';
-    this.#Board_init[0][5].f8 = 'B';
-    this.#Board_init[0][6].g8 = 'N';
-    this.#Board_init[0][7].h8 = 'R';
-    this.#Board_init[7][0].a1 = 'R';
-    this.#Board_init[7][1].b1 = 'N';
-    this.#Board_init[7][2].c1 = 'B';
-    this.#Board_init[7][3].d1 = 'Q';
-    this.#Board_init[7][4].e1 = 'K';
-    this.#Board_init[7][5].f1 = 'B';
-    this.#Board_init[7][6].g1 = 'N';
-    this.#Board_init[7][7].h1 = 'R';
-    this.#Board_init[1][0].a7 = 'P'
-    this.#Board_init[1][1].b7 = 'P'
-    this.#Board_init[1][2].c7 = 'P'
-    this.#Board_init[1][3].d7 = 'P'
-    this.#Board_init[1][4].e7 = 'P'
-    this.#Board_init[1][5].f7 = 'P'
-    this.#Board_init[1][6].g7 = 'P'
-    this.#Board_init[1][7].h7 = 'P'
-    this.#Board_init[6][0].a2 = 'P'
-    this.#Board_init[6][1].b2 = 'P'
-    this.#Board_init[6][2].c2 = 'P'
-    this.#Board_init[6][3].d2 = 'P'
-    this.#Board_init[6][4].e2 = 'P'
-    this.#Board_init[6][5].f2 = 'P'
-    this.#Board_init[6][6].g2 = 'P'
-    this.#Board_init[6][7].h2 = 'P'
+    this.#Board_init[0][0].a8 = ['R'];
+    this.#Board_init[0][1].b8 = ['N'];
+    this.#Board_init[0][2].c8 = ['B'];
+    this.#Board_init[0][3].d8 = ['Q'];
+    this.#Board_init[0][4].e8 = ['K'];
+    this.#Board_init[0][5].f8 = ['B'];
+    this.#Board_init[0][6].g8 = ['N'];
+    this.#Board_init[0][7].h8 = ['R'];
+    this.#Board_init[7][0].a1 = ['R'];
+    this.#Board_init[7][1].b1 = ['N'];
+    this.#Board_init[7][2].c1 = ['B'];
+    this.#Board_init[7][3].d1 = ['Q'];
+    this.#Board_init[7][4].e1 = ['K'];
+    this.#Board_init[7][5].f1 = ['B'];
+    this.#Board_init[7][6].g1 = ['N'];
+    this.#Board_init[7][7].h1 = ['R'];
+    this.#Board_init[1][0].a7 = ['P'];
+    this.#Board_init[1][1].b7 = ['P'];
+    this.#Board_init[1][2].c7 = ['P'];
+    this.#Board_init[1][3].d7 = ['P'];
+    this.#Board_init[1][4].e7 = ['P'];
+    this.#Board_init[1][5].f7 = ['P'];
+    this.#Board_init[1][6].g7 = ['P'];
+    this.#Board_init[1][7].h7 = ['P'];
+    this.#Board_init[6][0].a2 = ['P'];
+    this.#Board_init[6][1].b2 = ['P'];
+    this.#Board_init[6][2].c2 = ['P'];
+    this.#Board_init[6][3].d2 = ['P'];
+    this.#Board_init[6][4].e2 = ['P'];
+    this.#Board_init[6][5].f2 = ['P'];
+    this.#Board_init[6][6].g2 = ['P'];
+    this.#Board_init[6][7].h2 = ['P'];
   }
   get getChess_Board() {
     return this.#Board_init;
   }
 }
 let test = new GameBoard();
-console.table(test.getChess_Board);
+console.table(test.Board_2D());
 module.exports = GameBoard;
