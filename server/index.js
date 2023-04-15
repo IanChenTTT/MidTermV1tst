@@ -32,8 +32,11 @@ io.on("connection", (socket) => {
   socket.on("ChessCORD",async (y,x)=>{
     console.log(y,x)
 
-    const result = await PlayerGame.getTarget(y,x);
-    console.log(result)
+    const result = await PlayerGame.getTarget(y,x).then(()=>{
+      console.log(PlayerGame.Target);
+    })
+    
+    // console.log(result)
   })
 });
 

@@ -1,25 +1,26 @@
 const { resolve } = require("path");
 const GameBoard = require("../Util/GameBoard.js");
+const DoubleLinkList = require("../Ds/Linklist.js")
 class EachGame extends GameBoard {
-  #gameHistory;
+  #CurrentGameBoard;
   #gameHistoryArr;
   //   -1 Mean white turn
   #PlayerTurn = -1;
   #Player1State;
   #PlayerTarget = [];
   #Player2State;
-
+  #PlayerMoveHistory = new DoubleLinkList();
   constructor() {
     super();
-    this.#gameHistory = this.getChess_Board;
+    this.#CurrentGameBoard = this.getChess_Board;
   }
   get getGameHistory() {
-    return this.#gameHistory;
+    return this.#CurrentGameBoard;
   }
   getSearchHistory(y, x) {
-    return this.#gameHistory[y][x];
+    return this.#CurrentGameBoard[y][x];
   }
-  get #Target() {
+  get Target() {
     return this.#PlayerTarget;
   }
   set #Target(arg) {
@@ -38,7 +39,7 @@ class EachGame extends GameBoard {
         let tempArr = [];
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y][x1]);
+          let a = Object.values(this.#CurrentGameBoard[y][x1]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock === false) isBlock = true;
           else if (isBlock === false) Arr.push(`${y}_${x1}`);
@@ -49,7 +50,7 @@ class EachGame extends GameBoard {
 
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y][x2]);
+          let a = Object.values(this.#CurrentGameBoard[y][x2]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock1 === false) isBlock1 = true;
           else if (isBlock1 === false) Arr.push(`${y}_${x2}`);
@@ -59,7 +60,7 @@ class EachGame extends GameBoard {
         let tempArr = [];
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y1][x]);
+          let a = Object.values(this.#CurrentGameBoard[y1][x]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock2 === false) isBlock2 = true;
           else if (isBlock2 === false) Arr.push(`${y1}_${x}`);
@@ -69,7 +70,7 @@ class EachGame extends GameBoard {
         let tempArr = [];
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y2][x]);
+          let a = Object.values(this.#CurrentGameBoard[y2][x]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock3 === false) isBlock3 = true;
           else if (isBlock3 === false) Arr.push(`${y2}_${x}`);
@@ -110,7 +111,7 @@ class EachGame extends GameBoard {
         let tempArr = [];
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y1][x1]);
+          let a = Object.values(this.#CurrentGameBoard[y1][x1]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock === false) isBlock = true;
           else if (isBlock === false) Arr.push(`${y2}_${x1}`);
@@ -121,7 +122,7 @@ class EachGame extends GameBoard {
 
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y2][x2]);
+          let a = Object.values(this.#CurrentGameBoard[y2][x2]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock1 === false) isBlock1 = true;
           else if (isBlock1 === false) Arr.push(`${y2}_${x2}`);
@@ -131,7 +132,7 @@ class EachGame extends GameBoard {
         let tempArr = [];
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y3][x3]);
+          let a = Object.values(this.#CurrentGameBoard[y3][x3]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock2 === false) isBlock2 = true;
           else if (isBlock2 === false) Arr.push(`${y3}_${x3}`);
@@ -141,7 +142,7 @@ class EachGame extends GameBoard {
         let tempArr = [];
         // offload
         setTimeout(() => {
-          let a = Object.values(this.#gameHistory[y4][x4]);
+          let a = Object.values(this.#CurrentGameBoard[y4][x4]);
           tempArr.push(a[0].toString());
           if (tempArr[0] !== "" && isBlock3 === false) isBlock3 = true;
           else if (isBlock3 === false) Arr.push(`${y4}_${x4}`);
@@ -168,7 +169,7 @@ class EachGame extends GameBoard {
         for (let x2 = x - 1; x2 <= x + 1; x2++) {
           setTimeout(() => {
             if (x2 >= 0 && x2 < 8 && y1 < 8 && y1 >= 0) {
-              if (Object.values(this.#gameHistory[y1][x2]) === "")
+              if (Object.values(this.#CurrentGameBoard[y1][x2]) === "")
                 temp.push(`${y1}_${x1}`);
             }
           }, 0);
@@ -182,7 +183,7 @@ class EachGame extends GameBoard {
   #Pawnmove(y, x) {
     return new Promise((resolve) => {
       if (y + 2 < 8) {
-        resolve(this.#gameHistory[y + 2][x]);
+        resolve(this.#CurrentGameBoard[y + 2][x]);
       }
     });
   }
@@ -191,7 +192,7 @@ class EachGame extends GameBoard {
   async getTarget(...target) {
     let y = parseInt(target[0]);
     let x = parseInt(target[1]);
-    let current = this.#gameHistory[y][x];
+    let current = this.#CurrentGameBoard[y][x];
     let a = Object.values(current);
     let holder = [];
     // Object values return array [['R','W']]
