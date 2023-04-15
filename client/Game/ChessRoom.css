@@ -49,3 +49,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+.MoveAble{
+  background-color: green;
+  box-shadow: 10px 10px;
+}
