@@ -29,16 +29,23 @@ app.all("*", (req, res) => {
 // });
 let counter = 0;
 io.on("connection", (socket) => {
+  let DataisCreate = false;
   console.log("a user is connected", socket.id);
-  socket.on("ChessCORD", async (y, x) => {
+
+  socket.on("ChessCORD", (y, x) => {
     console.log(y, x);
 
-    const result = await PlayerGame.getTarget(y, x).then(() => {
+    PlayerGame.getTarget(y, x).then(() => {
       console.log(PlayerGame.Target);
-      socket.emit("Gettarget", `${PlayerGame.Target}`);
+      socket.emit("Gettarget", PlayerGame.Target);
+      DataisCreate = true;
       return PlayerGame.Target;
     });
-    // console.log(result)
+  });
+
+  socket.on("dragEnd", (arg) => {
+    console.log(arg);
+    socket.emit("Returntarget",PlayerGame.Target);
   });
 });
 

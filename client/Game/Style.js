@@ -38,7 +38,7 @@ for (let y = 0; y < 2; y++) {
   for (let x = 0; x < 8; x++) 
   {
     let ChessJ = document.createElement(`div`);
-    ChessJ.classList.add(`${y}_${x}`, `ChessPiece`,'CanDrag');
+    ChessJ.classList.add(`${y}_${x}`, `ChessPiece`,'CanDrag','dropable');
     ChessJ.setAttribute("draggable","true");
     ChessJ.style.backgroundImage = `url(../image/${image[y][x]}.svg)`;
     JSel3.appendChild(ChessJ)
@@ -48,7 +48,7 @@ for (let y = 2; y < 6; y++) {
   for (let x = 0; x < 8; x++) 
   {
     let ChessJ = document.createElement(`div`);
-    ChessJ.classList.add(`${y}_${x}`);
+    ChessJ.classList.add(`${y}_${x}`,'dropable');
     JSel3.appendChild(ChessJ)
   }
 }
@@ -57,7 +57,7 @@ for (let y = 2, y1=6; y < 4 ,y1<8; y++,y1++) {
   for (let x = 0; x < 8; x++) 
   {
     let ChessJ = document.createElement(`div`);
-    ChessJ.classList.add(`${y1}_${x}`, `ChessPiece`,'CanDrag');
+    ChessJ.classList.add(`${y1}_${x}`, `ChessPiece`,'CanDrag','dropable');
     ChessJ.setAttribute("draggable","true");
     ChessJ.style.backgroundImage = `url(../image/${image[y][x]}.svg)`;
     JSel3.appendChild(ChessJ)
