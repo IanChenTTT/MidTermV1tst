@@ -1,17 +1,69 @@
-*::before
-*::after{
-    box-sizing: border-box;
-}
-html{
-    height: 100%;
-}
-body{
-    padding: 0;
-    margin: 0;
-    height: 100svh;
-}
-#wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+  *::before *::after {
+      box-sizing: border-box;
+  }
+
+  :root {
+
+      --lightGreen: #6ed299;
+      --darkGreen: #48b179;
+  }
+
+  html {
+      height: 100%;
+  }
+
+  body {
+      padding: 0;
+      margin: 0;
+      height: 100svh;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+  }
+
+  .AwsomeFont {
+      font-size: clamp(1rem, 1.5rem + 1vw, 3rem);
+  }
+
+  #wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+  }
+
+  #wrapper header {
+      background-color: var(--darkGreen);
+      display: flex;
+      flex-direction: row;
+      width: 60%;
+      gap: 0.5em;
+  }
+
+  #wrapper h1 {
+      flex-basis: 50%;
+  }
+
+  #wrapper header img {
+      flex-basis: 50%;
+      width: 100%;
+      height: 100%;
+  }
+
+  #wrapper form {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      padding: 1em;
+      font-size: clamp(0.5rem, 1rem + 1vw, 2rem);
+  }
+
+  #wrapper .Form_Sec {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: var(--lightGreen);
+  }

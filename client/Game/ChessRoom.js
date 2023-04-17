@@ -22,7 +22,7 @@ socket.on("Gettarget", (target) => {
     });
   }
 });
- socket.on("Returntarget", (target) => 
+ socket.on("ReturnTarget", (target) => 
   {
     if (target[0] !== "") 
     {

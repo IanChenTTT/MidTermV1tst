@@ -6,6 +6,8 @@ const app = express();
 const httpServer = createServer(app);
 const path = require("path");
 const io = new Server(httpServer);
+const PORT = 3000 || process.env.PORT;
+console.log(PORT);
 //   , {
 //     path: "/ChessRoom"
 // });

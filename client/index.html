@@ -8,12 +8,30 @@
     <!-- source  -->
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <title>Document</title>
 </head>
 
 <body>
     <div id="wrapper">
-       <h1>this is the test of set</h1> 
+        <header>
+            <img src="./image/BoardIcon.svg" alt="">
+            <h1 class="AwsomeFont">Play Chess</h1>
+        </header>
+        <form action="./Game/ChessRoom.html">
+            <div class="Form_Sec">
+                <label for="username">Username</label>
+                <input type="text" name="username"
+                 id="username" placeholder="Enter user name" required>
+            </div>
+            <div class="Form_Sec">
+                <label for="room">Room</label>
+                <input type="text" name="room"
+                 id="room" placeholder="Enter room number" required>
+            </div>
+            <button type="submit" class="btn">Join room</button>
+        </form>
     </div>
 </body>
 
