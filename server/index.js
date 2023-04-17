@@ -2,6 +2,7 @@ const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const EachGame = require("../public/Util/EachGame");
+const { Userjoin, getCurrentUser } = require("../public/Util/User");
 const app = express();
 const httpServer = createServer(app);
 const path = require("path");
@@ -31,26 +32,29 @@ app.all("*", (req, res) => {
 // });
 let counter = 0;
 io.on("connection", (socket) => {
+  // Client join Room
   let DataisCreate = false;
-  console.log("a user is connected", socket.id);
+  socket.on("joinRoom", ({ thisUsername, thisRoom }) => {
+    console.log("a user is connected", socket.id);
+    const user = Userjoin(socket.id, thisUsername, thisRoom);
+    socket.on("ChessCORD", (y, x) => {
+      console.log(y, x);
 
-  socket.on("ChessCORD", (y, x) => {
-    console.log(y, x);
-
-    PlayerGame.getTarget(y, x).then(() => {
-      console.log(PlayerGame.Target);
-      socket.emit("Gettarget", PlayerGame.Target);
-      DataisCreate = true;
-      return PlayerGame.Target;
+      PlayerGame.getTarget(y, x).then(() => {
+        console.log(PlayerGame.Target);
+        socket.emit("Gettarget", PlayerGame.Target);
+        DataisCreate = true;
+        return PlayerGame.Target;
+      });
     });
-  });
 
-  socket.on("dragEnd", (arg) => {
-    console.log(arg);
-    socket.emit("Returntarget",PlayerGame.Target);
+    socket.on("dragEnd", (arg) => {
+      console.log(arg);
+      socket.emit("Returntarget", PlayerGame.Target);
+    });
   });
 });
 
-httpServer.listen(3000, () => {
+httpServer.listen(PORT, () => {
   console.log("connet to port 3000");
 });

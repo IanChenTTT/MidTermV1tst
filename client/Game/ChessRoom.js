@@ -1,11 +1,22 @@
 const socket = io();
 const item = document.querySelectorAll(".CanDrag");
-item.forEach((element) => {
+// Get the URL qquery string
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+const thisUsername = params.username;
+const thisRoom = params.room;
+// -------------------------
+// Join room
+socket.emit("joinRoom",{thisUsername,thisRoom});
+item.forEach((element) => 
+{
   element.addEventListener("dragstart", function (event) {
     dragStart(event, this);
   });
   // To allow drop
   element.addEventListener("dragend", function (event) {
+    console.log("drag end")
     dragEnd(event, this);
   });
   element.addEventListener("dragover", (event) => {
@@ -24,6 +35,7 @@ socket.on("Gettarget", (target) => {
 });
  socket.on("ReturnTarget", (target) => 
   {
+    console.log(target);
     if (target[0] !== "") 
     {
       target.forEach((element) => 
@@ -33,6 +45,7 @@ socket.on("Gettarget", (target) => {
       });
     }
   });
+ 
 // IMPORTANT SET SOCKET ON OUTSIDE EVENT LISNTER!!!!!!!
 async function dragStart(event, element) {
   event.dataTransfer.setData("Text", event.target.id);
@@ -48,7 +61,8 @@ async function dragStart(event, element) {
   );
   console.log("drag start");
 }
-async function dragEnd(event, element) {
+ function dragEnd(event, element) {
+  console.log("enter drag end")
   socket.emit("dragEnd", true);
  
 }
