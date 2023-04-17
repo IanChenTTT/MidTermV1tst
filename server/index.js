@@ -31,18 +31,23 @@ app.all("*", (req, res) => {
 //   res.status(404).send("resource not found");
 // });
 let counter = 0;
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   // Client join Room
   let DataisCreate = false;
-  socket.on("joinRoom", ({ thisUsername, thisRoom }) => {
-    console.log("a user is connected", socket.id);
+  socket.on("joinRoom", ( thisUsername, thisRoom ) => {
+    console.log(thisUsername,thisRoom);
     const user = Userjoin(socket.id, thisUsername, thisRoom);
+    socket.join(user.room);
+    console.log("a user is connected", socket.id,`Room id is ${thisRoom}`);
+    socket.broadcast.to(user.room).emit('UserEnterMSG',user.name);
+    // Player event is right here 
     socket.on("ChessCORD", (y, x) => {
       console.log(y, x);
 
       PlayerGame.getTarget(y, x).then(() => {
         console.log(PlayerGame.Target);
         socket.emit("Gettarget", PlayerGame.Target);
+        socket.broadcast.to(user.room).emit("Gettarget", PlayerGame.Target);
         DataisCreate = true;
         return PlayerGame.Target;
       });
@@ -50,8 +55,16 @@ io.on("connection", (socket) => {
 
     socket.on("dragEnd", (arg) => {
       console.log(arg);
-      socket.emit("Returntarget", PlayerGame.Target);
+      socket.emit("ReturnTarget", PlayerGame.Target);
+      socket.broadcast.to(user.room).emit("ReturnTarget", PlayerGame.Target);
+
     });
+  });
+  socket.on("error", (err) => {
+    console.err(err);
+    if (err && err.message === "unauthorized event") {
+      socket.disconnect();
+    }
   });
 });
 

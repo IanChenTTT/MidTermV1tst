@@ -8,7 +8,8 @@ const thisUsername = params.username;
 const thisRoom = params.room;
 // -------------------------
 // Join room
-socket.emit("joinRoom",{thisUsername,thisRoom});
+console.log(thisRoom);
+socket.emit("joinRoom",thisUsername,thisRoom);
 item.forEach((element) => 
 {
   element.addEventListener("dragstart", function (event) {
@@ -35,7 +36,7 @@ socket.on("Gettarget", (target) => {
 });
  socket.on("ReturnTarget", (target) => 
   {
-    console.log(target);
+    console.log(target,"Returnning target");
     if (target[0] !== "") 
     {
       target.forEach((element) => 
@@ -45,6 +46,9 @@ socket.on("Gettarget", (target) => {
       });
     }
   });
+  socket.on("UserEnterMSG",(arg)=>{
+    console.log(arg);
+  })
  
 // IMPORTANT SET SOCKET ON OUTSIDE EVENT LISNTER!!!!!!!
 async function dragStart(event, element) {
@@ -63,6 +67,6 @@ async function dragStart(event, element) {
 }
  function dragEnd(event, element) {
   console.log("enter drag end")
-  socket.emit("dragEnd", true);
+  socket.emit("dragEnd", "drag has end");
  
 }
