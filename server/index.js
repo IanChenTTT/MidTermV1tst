@@ -1,8 +1,8 @@
 const express = require("express");
-const { createServer } = require("http");
+const { createServer, get } = require("http");
 const { Server } = require("socket.io");
 const EachGame = require("../public/Util/EachGame");
-const { Userjoin, getCurrentUser } = require("../public/Util/User");
+const { Userjoin, getUserID , getAlluserS } = require("../public/Util/User");
 const app = express();
 const httpServer = createServer(app);
 const path = require("path");
@@ -15,7 +15,6 @@ console.log(PORT);
 // console.log(path.sep)
 // console.log(path.join(__dirname,'..','client'))
 console.log(__dirname);
-let PlayerGame = new EachGame();
 app.use(express.static(path.join(__dirname, "..", "client")));
 app.use(express.static(path.join(__dirname, "..", "public/Util")));
 app.use("/", (req, res) => {
@@ -38,25 +37,36 @@ io.on("connection", async (socket) => {
     console.log(thisUsername,thisRoom);
     const user = Userjoin(socket.id, thisUsername, thisRoom);
     socket.join(user.room);
+    console.log(user.Iswhite)
+    socket.emit("WhiteORBlack",user.Iswhite);
+    let PlayerGame = new EachGame(user.Iswhite);
     console.log("a user is connected", socket.id,`Room id is ${thisRoom}`);
+    console.log(`Current User Color ${PlayerGame.getUserColor()} + ${getUserID(1)}`);
     socket.broadcast.to(user.room).emit('UserEnterMSG',user.name);
     // Player event is right here 
     socket.on("ChessCORD", (y, x) => {
       console.log(y, x);
-
       PlayerGame.getTarget(y, x).then(() => {
         console.log(PlayerGame.Target);
+        console.log(PlayerGame.OpponentTar)
         socket.emit("Gettarget", PlayerGame.Target);
-        socket.broadcast.to(user.room).emit("Gettarget", PlayerGame.Target);
+        socket.broadcast.to(user.room).emit("Gettarget", PlayerGame.OpponentTar);
         DataisCreate = true;
         return PlayerGame.Target;
       });
     });
-
+    socket.on("JudgeColor",(...arg)=>{
+      let y = parseInt(arg[0]);
+      let x = parseInt(arg[1]);
+      if(PlayerGame.getBordColor(y,x) === PlayerGame.getUserColor())
+        socket.emit("ResultColor",true,y,x);
+      else
+        socket.emit("ResultColor",false,y,x)
+    })
     socket.on("dragEnd", (arg) => {
       console.log(arg);
       socket.emit("ReturnTarget", PlayerGame.Target);
-      socket.broadcast.to(user.room).emit("ReturnTarget", PlayerGame.Target);
+      socket.broadcast.to(user.room).emit("ReturnTarget", PlayerGame.OpponentTar);
 
     });
   });

@@ -1,12 +1,7 @@
 // import ChessPiece from "../../public/Util/BoardPiece";
 
-let image = [
-  [`BR`, `BN`, `BB`, `BQ`, `BK`, `BB`, `BN`, `BR`],
-  [`BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`],
-  [`WR`, `WN`, `WB`, `WQ`, `WK`, `WB`, `WN`, `WR`],
-  [`WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`],
-];
-const BoardUID = [["8a", "8b", "8c"]];
+function SpawnBoard(SwitchPlayer){
+
 //Chess element start at 1 offset is +1
 // 1: Rook 2:Knight 3:Bishop 4: Queen 5:king 6 Pawn => Black
 // 10: Pawn 11:Rook 12:Knight 13:Bishop 14: Queen 15: King => white
@@ -14,6 +9,7 @@ const BoardUID = [["8a", "8b", "8c"]];
 // create element only create once hence you need throw into for!!!!
 // Set Back as board color and Font is Chess piece each is individual div!!
 
+const image = PlayerSwitcher(SwitchPlayer);
 //----------Back
 let JSel1 = document.querySelector("#Back");
 let SwapBlock = -1;
@@ -63,3 +59,29 @@ for (let y = 2, y1=6; y < 4 ,y1<8; y++,y1++) {
     JSel3.appendChild(ChessJ)
   }
 }
+}
+function PlayerSwitcher(Yes){
+  if(Yes)
+  {
+  return  (
+    [
+  [`BR`, `BN`, `BB`, `BQ`, `BK`, `BB`, `BN`, `BR`],
+  [`BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`],
+  [`WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`],
+  [`WR`, `WN`, `WB`, `WQ`, `WK`, `WB`, `WN`, `WR`]
+] 
+  ) ;
+  }
+  else
+  {
+  return   (
+    [
+  [`WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`, `WP`],
+  [`WR`, `WN`, `WB`, `WQ`, `WK`, `WB`, `WN`, `WR`],
+  [`BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`, `BP`],
+  [`BR`, `BN`, `BB`, `BQ`, `BK`, `BB`, `BN`, `BR`],
+]
+  );
+  }
+}
+

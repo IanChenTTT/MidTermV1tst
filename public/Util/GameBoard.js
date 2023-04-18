@@ -1,22 +1,14 @@
 const ChessPiece = require("../Util/BoardPiece.js");
 class GameBoard extends ChessPiece {
   #Board_init;
-  #Board_Color_init2D = [];
+  #Board_Black_init2D = [];
+  #Board_white_init2D = [];
   constructor() {
     super();
     const Verticle = [8, 7, 6, 5, 4, 3, 2, 1];
     const Horizontle = ["a", "b", "c", "d", "e", "f", "g", "h"];
-     this.#Board_Color_init2D = [
-      ['W','W','W','W','W','W','W','W'],
-      ['W','W','W','W','W','W','W','W'],
-      ['','','','','','','',''],
-      ['','','','','','','',''],
-      ['','','','','','','',''],
-      ['','','','','','','',''],
-      ['B','B','B','B','B','B','B','B'],
-      ['B','B','B','B','B','B','B','B'],
-    ]
-
+    
+    
     this.Board_2D = () => {
       return this.CreateBoardArr2D(Verticle, Horizontle);
     };
@@ -87,8 +79,6 @@ class GameBoard extends ChessPiece {
   get getChess_Board() {
     return this.#Board_init;
   }
-  get getChess_Color(){
-    return this.#Board_Color_init2D;
-  }
+ 
 }
 module.exports = GameBoard;
