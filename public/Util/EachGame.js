@@ -43,11 +43,15 @@ class EachGame extends GameBoard {
       this.#Player2Color = "W";
     }
   }
-  getUserColor() {
+  getUserColor2D() {
+    return this.#PlayerColorBoard;
+  }
+  getUserColor(){
     return this.#Player1Color;
   }
 
   getBordColor(y, x) {
+    console.log(y,x);
     return this.#PlayerColorBoard[y][x];
   }
   get getGameHistory() {
@@ -61,6 +65,21 @@ class EachGame extends GameBoard {
   }
   get OpponentTar(){
     return this.#Player2Target;
+  }
+  setCurrentHistory(y,x,y1,x2){
+    let first = Object.entries(this.#CurrentGameBoard[y][x]);
+    let second = Object.entries(this.#CurrentGameBoard[y1][x2]);
+    let temp = first[0][0];
+    let temp1 = second[0][0];
+    console.log(this.#CurrentGameBoard[y][x][temp],"Settting Board");
+    this.#CurrentGameBoard[y1][x2][temp1] = this.#CurrentGameBoard[y][x][temp];
+    this.#CurrentGameBoard[y][x][temp] = "";
+    // Object.values(this.#CurrentGameBoard[y][x])="";
+
+  }
+  setBoardColor(y,x,y1,x2){
+    this.#PlayerColorBoard[y1][x2] = this.#PlayerColorBoard[y][x];
+    this.#PlayerColorBoard[y][x] = "";
   }
   set #Target(arg) {
     this.#PlayerTarget = arg;
@@ -245,9 +264,14 @@ class EachGame extends GameBoard {
   }
   #Pawnmove(y, x) {
     return new Promise((resolve) => {
-      if (y + 2 < 8) {
-        resolve(this.#CurrentGameBoard[y + 2][x]);
-      }
+      let test = [];
+
+      if (y -1 < 8) 
+        test.push(`${y-1}_${x}`);
+      if(y - 2 < 8)
+          test.push(`${y-2}_${x}`);
+      console.log(test);
+      resolve(test)
     });
   }
   //   spread syntax!!!

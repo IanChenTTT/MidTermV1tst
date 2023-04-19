@@ -12,21 +12,52 @@ socket.emit("joinRoom", thisUsername, thisRoom);
 socket.on("WhiteORBlack", (Switcher) => {
   console.log(SpawnBoard(Switcher));
   const item = document.querySelectorAll(".CanDrag");
+  const item2 = document.querySelectorAll(".dropable");
+  // console.log(item2);
   item.forEach((element) => {
-    element.addEventListener("dragstart", function (event) {
-      console.log("dragstart");
-      dragStart(event, this);
-    });
-    // To allow drop
-    element.addEventListener("dragend", function (event) {
-      console.log("drag end");
-      dragEnd(event, this);
-    });
+    AddDragEvent(element);
+  });
+  item2.forEach((element, key) => {
     element.addEventListener("dragover", (event) => {
       event.preventDefault();
     });
+    element.addEventListener("dragenter", (event) => {
+      event.preventDefault();
+    });
+    element.addEventListener("drop", (event) => {
+      event.preventDefault();
+      let target = element.className.split(" ")
+      const data = event.dataTransfer.getData("text");
+    let origin = data.split(" ");
+    console.log(origin[0]);
+      socket.emit("dropTarget",target[0],origin[0]);
+    });
   });
 });
+function AddDragEvent(element) {
+  element.addEventListener("dragstart", function (event) {
+    console.log("dragstart");
+    dragStart(event, this);
+  });
+  // To allow drop
+  element.addEventListener("dragend", function (event) {
+    console.log("drag end");
+    dragEnd(event, this);
+  });
+}
+function RemoveDragEvent(element) {
+  element.removeEventListener("dragstart", function (event) {
+    console.log("dragstart");
+    dragStart(event, this);
+  });
+  element.removeEventListener("dragend", function (event) {
+    console.log("drag end");
+    dragEnd(event, this);
+  });
+}
+function dragging (){
+  
+}
 // Fire When dragStart
 socket.on("Gettarget", (target) => {
   console.table(target);
@@ -48,27 +79,38 @@ socket.on("ReturnTarget", (target) => {
     });
   }
 });
+// Success drop
+socket.on("drop", (target,origin,Pic) => {
+  let Orig = document.getElementsByClassName(origin)
+  let Tar = document.getElementsByClassName(target)
+  Tar[0].setAttribute("draggable","true");
+  RemoveDragEvent(Orig[0]);
+  AddDragEvent(Tar[0]);
+  Orig[0].style.backgroundImage = `none`;
+  Tar[0].style.backgroundImage = `url(../image/${Pic}.svg)`;
+  console.log(Orig[0],Tar[0]);
+});
 // Fire when eser Enter
 socket.on("UserEnterMSG", (arg) => {
   console.log(arg);
 });
- socket.on("ResultColor", (IsColor,y,x) => {
-    let result = IsColor;
-    if (result) {
-      console.log("enter chess cord");
-      socket.emit("ChessCORD",y,x,
-        (arg) => {
-          console.log(arg);
-        }
-      );
-    } else {
-      console.log("chess cord");
-      return null;
-    }
-  });
+socket.on("ResultColor", (IsColor, y, x) => {
+  let result = IsColor;
+  if (result) {
+    console.log("enter chess cord");
+    socket.emit("ChessCORD", y, x, (arg) => {
+      console.log(arg);
+    });
+  } else {
+    console.log("chess cord");
+    return null;
+  }
+});
 // IMPORTANT SET SOCKET ON OUTSIDE EVENT LISNTER!!!!!!!
 async function dragStart(event, element) {
-  event.dataTransfer.setData("Text", event.target.id);
+  event.dataTransfer.setData("Text", event.target.className);
+  const data = event.dataTransfer.getData("text");
+  console.log(data);
   console.log(element.className[0] + " " + element.className[2]);
   //  Catch if user drag own color
   socket.emit("JudgeColor", element.className[0], element.className[2]);
