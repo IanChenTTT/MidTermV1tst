@@ -85,15 +85,30 @@ io.on("connection", async (socket) => {
       console.log(Pic, Pic2[0]);
       PlayerGame.Target.forEach((element) => {
         console.log(target === element);
-        console.log(y , x , y1 , x1 ,"test drop");
+        console.log(y, x, y1, x1, "test drop");
         if (target === element) {
-          socket.emit("drop", element, origin, `${Pic}${Pic2}`);
-          PlayerGame.setCurrentHistory(y,x,y1,x1);
-          PlayerGame.setBoardColor(y,x,y1,x1);
-        console.table(PlayerGame.getChess_Board);
-      console.table(PlayerGame.getUserColor2D());
+          socket.emit("drop", element, origin, `${Pic}${Pic2}`, [y, x, y1, x1]);
+          let opponentTar = `${7 - element[0]}` + "_" + `${7 - element[2]}`;
+          let opponentOrigin = `${7 - origin[0]}` + "_" + `${7 - origin[2]}`;
+          console.log(opponentTar, opponentOrigin);
+          socket.broadcast
+            .to(user.room)
+            .emit("drop", opponentTar, opponentOrigin, `${Pic}${Pic2}`, [
+              7 - y,
+              7 - x,
+              7 - y1,
+              7 - x1,
+            ]);
         }
-      })
+      });
+    });
+    socket.on("UserBoardChange", (Arr) => {
+      console.log(Arr);
+
+      PlayerGame.setCurrentHistory(Arr[0], Arr[1],Arr[2], Arr[3]);
+      PlayerGame.setBoardColor(Arr[0], Arr[1],Arr[2], Arr[3]);
+      console.table(PlayerGame.getChess_Board);
+      console.table(PlayerGame.getUserColor2D());
     });
   });
   socket.on("error", (err) => {

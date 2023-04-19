@@ -79,8 +79,12 @@ socket.on("ReturnTarget", (target) => {
     });
   }
 });
+// Fire when opponent move is valid
+// socket.on("RemoveTarget",...arg =>{
+//   arg[0]
+// })
 // Success drop
-socket.on("drop", (target,origin,Pic) => {
+socket.on("drop", (target,origin,Pic,Arr) => {
   let Orig = document.getElementsByClassName(origin)
   let Tar = document.getElementsByClassName(target)
   Tar[0].setAttribute("draggable","true");
@@ -88,6 +92,7 @@ socket.on("drop", (target,origin,Pic) => {
   AddDragEvent(Tar[0]);
   Orig[0].style.backgroundImage = `none`;
   Tar[0].style.backgroundImage = `url(../image/${Pic}.svg)`;
+  socket.emit("UserBoardChange",Arr);
   console.log(Orig[0],Tar[0]);
 });
 // Fire when eser Enter
