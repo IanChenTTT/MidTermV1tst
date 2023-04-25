@@ -11,28 +11,95 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
         integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <title>Document</title>
+
 </head>
 
 <body>
     <div id="wrapper">
-        <header>
-            <img src="./image/BoardIcon.svg" alt="">
-            <h1 class="AwsomeFont">Play Chess</h1>
-        </header>
-        <form action="./Game/ChessRoom.html">
-            <div class="Form_Sec">
-                <label for="username">Username</label>
-                <input type="text" name="username"
-                 id="username" placeholder="Enter user name" required>
-            </div>
-            <div class="Form_Sec">
-                <label for="room">Room</label>
-                <input type="text" name="room"
-                 id="room" placeholder="Enter room number" required>
-            </div>
-            <button type="submit" class="btn">Join room</button>
-        </form>
+        <nav>
+            <ul>
+                <li>首頁</li>
+                <li>對戰</li>
+                <li>紀錄</li>
+                <li style="float: right;"><button style="width: 100%;">User</button></li>
+            </ul>
+        </nav>
+        <div id="main_wrapper">
+            <main>
+                <div id="main_Sec1">
+                    <div id="UserRoom">
+                        <div id="UserRoom_Num">房號</div>
+                        <div id="UserRoom_Name">房主名稱</div>
+                    </div>
+                    <div id="UserRoom">
+                        <div id="UserRoom_Num">房號</div>
+                        <div id="UserRoom_Name">房主名稱</div>
+                    </div>
+                    <div id="UserRoom">
+                        <div id="UserRoom_Num">房號</div>
+                        <div id="UserRoom_Name">房主名稱</div>
+                    </div>
+                    <div id="UserRoom">
+                        <div id="UserRoom_Num">房號</div>
+                        <div id="UserRoom_Name">房主名稱</div>
+                    </div>
+                    <div id="UserRoom">
+                        <div id="UserRoom_Num">房號</div>
+                        <div id="UserRoom_Name">房主名稱</div>
+                    </div>
+
+                </div>
+                <div id="main_Sec2">
+                    <button id="InputRoom">輸入房間</button>
+                    <button id="CreateRoom">創建房間</button>
+                </div>
+            </main>
+            <section>
+            </section>
+        </div>
+        <div id="form_wrapper">
+            <form action="./Game/ChessRoom.html">
+                <div class="Form_Sec">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Enter user name" required>
+                </div>
+                <div class="Form_Sec">
+                    <label for="room">Room</label>
+                    <input type="text" name="room" id="room" placeholder="Enter room number" required>
+                </div>
+                <button type="submit" class="btn">Join room</button>
+            </form>
+        </div>
     </div>
 </body>
+<script>
+    const InputRoom = document.querySelector("#InputRoom");
+    const CreateRoom = document.querySelector("#CreateRoom");
+    const myForm = document.querySelector("form");
+    const formwrapper = document.querySelector("#form_wrapper")
+    const label = document.querySelector("label")
+    const input = document.querySelector("input")
+    console.log(myForm);
+    let LeaveForm = false
+    InputRoom.addEventListener("click", function () {
+        console.log("click");
+        formwrapper.style.display = "flex";
+        myForm.style.display = 'flex';
+    })
+    myForm.addEventListener("mouseleave", function () {
+        LeaveForm = true;
+    })
+    myForm.addEventListener("mouseenter", function () {
+        LeaveForm = false;
+    })
+    window.addEventListener("click", function () {
+        if (LeaveForm === true) {
+            myForm.style.display = "none";
+            formwrapper.style.display = "none";
+            LeaveForm = false;
+        }
+    })
+
+</script>
 
 </html>

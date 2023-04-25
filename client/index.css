@@ -28,42 +28,147 @@
 
   #wrapper {
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
       width: 100%;
       height: 100%;
+      background-image: linear-gradient(45deg, #665b5a 25%, transparent 25%),
+          linear-gradient(135deg, #665b5a 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #665b5a 75%),
+          linear-gradient(135deg, transparent 75%, #665b5a 75%);
+      background-size: 40vh 40vh;
+      /* Must be a square */
+      background-position: 0 0, 20vh 0, 20vh -20vh, 0px 20vh;
+      /* Must be half of one side of the square */
   }
 
-  #wrapper header {
-      background-color: var(--darkGreen);
+
+  nav {
+      background-color: #A7F402D9;
+      width: 100%;
+      height: 6vh;
+  }
+
+  ul {
+      width: 100%;
+  }
+
+  ul>li {
+      list-style-type: none;
+      float: left;
+      width: 8.3vw;
+  }
+
+  #main_wrapper {
+      padding-inline: 5.5% 2%;
       display: flex;
       flex-direction: row;
-      width: 60%;
-      gap: 0.5em;
+      gap: 3.4vw;
   }
 
-  #wrapper h1 {
-      flex-basis: 50%;
+  main {
+      display: flex;
+      flex-direction: column;
+      width: 66vw;
+      height: 84vh;
+      margin-top: 5vh;
+      background-color: #d9d9d9e6;
   }
 
-  #wrapper header img {
-      flex-basis: 50%;
+  #main_Sec1 {
+      height: 69vh;
+      backdrop-filter: blur(5px);
+      background-color: rgba(217, 217, 217, 0.9);
+      ;
+      display: flex;
+      flex-direction: column;
       width: 100%;
+      overflow-y: scroll;
+      overflow-anchor: none;
+  }
+
+  #main_Sec1>div {
+      margin-top: 4%;
+      margin-right: 5.4%;
+      margin-left: 5.4%;
+      background-color: rgba(255, 255, 255, 0.9);
+      height: 15vh;
+  }
+
+  #UserRoom {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+  }
+
+  #UserRoom_Num {
+      flex: 27;
+      flex-shrink: 0;
+      border: 1px solid;
       height: 100%;
   }
 
-  #wrapper form {
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      padding: 1em;
-      font-size: clamp(0.5rem, 1rem + 1vw, 2rem);
+  #UserRoom_Name {
+      border: 1px solid;
+      flex: 70;
+      flex-shrink: 0;
+      height: 100%;
   }
 
+  #main_Sec2 {
+      height: 15vh;
+      background-color: rgba(217, 217, 217, 0.9);
+      display: flex;
+      flex-direction: row;
+      flex-direction: row-reverse;
+      align-items: center;
+  }
+
+  #main_Sec2>button {
+      float: right;
+      width: 15vw;
+      height: 9vh;
+  }
+
+  section {
+      width: 22vw;
+      height: 88vh;
+      margin-top: 1.9vh;
+      backdrop-filter: blur(5px);
+      background-color: #7c768180;
+  }
+
+
+  #wrapper form {
+      position: fixed;
+      width: 90vw;
+      height: 90vh;
+      display: none;
+      flex-direction: column;
+      font-size: clamp(2.5rem, 3.5rem + 1vw, 5rem);
+  }
+  #form_wrapper{
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
   #wrapper .Form_Sec {
       display: flex;
       flex-direction: column;
       width: 100%;
       background-color: var(--lightGreen);
+  }
+
+  #wrapper .Form_Sec>label {
+      height: 15vh;
+  }
+
+  #wrapper .Form_Sec>input {
+      height: 15vh;
+      font-size: clamp(2.5rem, 3.5rem + 1vw, 5rem);
+  }
+  #wrapper button {
+    height: 10vh;
   }
