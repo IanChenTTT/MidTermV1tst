@@ -7,60 +7,101 @@ html {
 body {
   padding: 0;
   margin: 0;
+  width: fit-content;
   min-height: 100vh;
-  position: relative;
   background-color: beige;
 }
 #root {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  width: 100svw;
+  height: 125svh;
+  writing-mode: horizontal-tb;
+  background-image: linear-gradient(45deg, #665b5a 25%, transparent 25%),
+    linear-gradient(135deg, #665b5a 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #665b5a 75%),
+    linear-gradient(135deg, transparent 75%, #665b5a 75%);
+  background-size: 40vh 40vh;
+  /* Must be a square */
+  background-position: 0 0, 20vh 0, 20vh -20vh, 0px 20vh;
+  /* Must be half of one side of the square */
+
+  position: relative;
+  overflow-x: none;
+}
+nav {
+  background-color: #a7f402d9;
   width: 100%;
-  height:100svh;
-  height: 100vh;
-  background-color: cadetblue;
+  height: 7.5vh;
+}
+
+ul {
+  width: 100%;
+  height: 100%;
+}
+
+ul > li {
+  list-style-type: none;
+  float: left;
+  width: 8.3vw;
+}
+#main_wrapper {
+  display: flex;
+  border: none;
+  flex-direction: row;
+  gap: 5vw;
+  justify-content: center;
+  flex-wrap: wrap;
+  transition: width 0.7s ease-out;
+  margin-top: 2vh;
+}
+main {
+  /* width: 70vh; */
+  width: fit-content;
+  height: fit-content;
+  background-repeat: no-repeat;
+  background-color: rgba(241, 236, 236, 0.863);
 }
 #Back {
   display: grid;
   border-style: solid;
   border-radius: 5px;
-  grid-template-columns: repeat(8, 60px);
-  grid-template-rows: repeat(8, 60px);
+  grid-template-columns: repeat(8, minmax(5.75vw, 9.75vh));
+  grid-template-rows: repeat(8, minmax(5.75vw, 9.75vh));
   z-index: -10;
-
 }
 #Front {
   display: grid;
   border-style: solid;
   border-radius: 5px;
-  grid-template-columns: repeat(8, 60px);
-  grid-template-rows: repeat(8, 60px);
+  grid-template-columns: repeat(8, minmax(5.75vw, 9.75vh));
+  grid-template-rows: repeat(8, minmax(5.75vw, 9.75vh));
   position: absolute;
   z-index: 10;
+  background-repeat: no-repeat;
 }
-section{
-  margin-left: 1em;
-  margin-right: 1em;
-  width: 95vw;
-  height: 10vh; 
-  padding-top: 1em;
+section {
+  /* flex-basis: max(100svh,19svw); */
+
+  transition: width 0.7s ease-out;
+  background-color: rgba(241, 236, 236, 0.863);
+  backdrop-filter: blur(2px);
 }
 section > div {
   padding-left: 1em;
   float: left;
 }
 .ColorBlock {
-  background-color: #C5B1AA;
+  background-color: #c5b1aae1;
 }
 .WhiteBlocks {
-  background-color: #665B5A;
+  background-color: #665b5ae8;
 }
-.ChessPiece{
+.ChessPiece {
   background-repeat: no-repeat;
   background-size: contain;
 }
-.MoveAble{
+.MoveAble {
   background-color: green;
   box-shadow: 10px 10px;
 }

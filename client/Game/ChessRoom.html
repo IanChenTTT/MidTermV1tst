@@ -10,21 +10,32 @@
     <!-- <script type="module" src="../../public/Util/EachGame.js" defer></script>
     <script type="module" src="RoomRule.js" defer></script>  -->
     <!-- To Back end -->
-    <script  src="ChessRoom.js" defer></script>
-    <script  src="Style.js" defer></script>
+    <script src="ChessRoom.js" defer></script>
+    <script src="Style.js" defer></script>
     <title>Document</title>
   </head>
   <body>
     <div id="root">
-      <header></header>
-      <main>
-        <div id="Front"></div>
-        <div id="Back"></div>
-      </main>
-      <section>
-        <div id="User1">This is user 1</div>
-        <div id="User2">This is user 2</div>
-      </section>
+      <nav>
+        <ul>
+          <li>首頁</li>
+          <li>對戰</li>
+          <li>紀錄</li>
+          <li style="float: right">
+            <button style="width: 100%">User</button>
+          </li>
+        </ul>
+      </nav>
+      <div id="main_wrapper">
+        <main>
+          <div id="Front"></div>
+          <div id="Back"></div>
+        </main>
+        <section>
+          <div id="User1">This is user 1</div>
+          <div id="User2">This is user 2</div>
+        </section>
+      </div>
     </div>
     <script src="../socket.io/socket.io.js"></script>
   </body>

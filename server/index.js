@@ -6,17 +6,23 @@ const { Userjoin, getUserID, getAlluserS } = require("../public/Util/User");
 const app = express();
 const httpServer = createServer(app);
 const path = require("path");
-const io = new Server(httpServer);
+const io = new Server(httpServer,{path:'/Loby/socket.io',cors:{
+  origin: "*"
+}});
 const PORT = 3000 || process.env.PORT;
 console.log(PORT);
 console.log(__dirname);
-app.use("/Loby",express.static(path.join(__dirname, "..", "client")));
+app.use("/Loby",express.static(path.join(__dirname,"../client")));
+// app.use("/Loby",express.static(path.join(__dirname, "..", "client/Game")));
 app.use(express.static(path.join(__dirname, "..", "public/Util")));
 
-app.all("*", (req, res) => {
-  res.end("<h1>404 NOT FOUND</h1>");
-});
-
+// app.all("*", (req, res) => {
+//   res.end("<h1>404 NOT FOUND</h1>");
+// });
+// app.use((req,res, next)=>{
+//   req.io = io;
+//   return next();
+// })
 let counter = 0;
 io.on("connection", async (socket) => {
   // Client join Room

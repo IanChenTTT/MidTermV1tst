@@ -1,8 +1,9 @@
-const socket = io();
+const socket = io("http://localhost:3000",{path: "/Loby/socket.io"});
 // Get the URL qquery string
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
+
 const thisUsername = params.username;
 const thisRoom = params.room;
 // -------------------------
