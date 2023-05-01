@@ -8,7 +8,7 @@ MidTermV1tst to server
 ```
 cd client
 npm download
-
+cd ..
 
 cd server 
 npm install
