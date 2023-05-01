@@ -6,12 +6,13 @@ to start dowload package
 open terminal in vscode <br>
 MidTermV1tst to server
 ```
-cd server 
-npm download
-node index.js
-
 cd client
 npm download
-localhost:3000/Loby
+
+
+cd server 
+npm install
+npm run start
 
 ```
+After install go localhost:3000/Loby
