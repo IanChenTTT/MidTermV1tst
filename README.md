@@ -9,7 +9,7 @@ MidTermV1tst to server
 git clone https://github.com/IanChenTTT/MidTermV1tst.git
 cd MidTermV1tst
 cd client
-npm download
+npm install
 cd ..
 
 cd server 
