@@ -7,7 +7,8 @@ const app = express();
 const httpServer = createServer(app);
 const path = require("path");
 const io = new Server(httpServer,{path:'/Loby/socket.io',cors:{
-  origin: "*"
+  origin: "http://localhost",
+  methods: ["GET", "POST"]
 }});
 const PORT = 3000 || process.env.PORT;
 console.log(PORT);
@@ -19,10 +20,7 @@ app.use(express.static(path.join(__dirname, "..", "public/Util")));
 // app.all("*", (req, res) => {
 //   res.end("<h1>404 NOT FOUND</h1>");
 // });
-// app.use((req,res, next)=>{
-//   req.io = io;
-//   return next();
-// })
+
 let counter = 0;
 io.on("connection", async (socket) => {
   // Client join Room
