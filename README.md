@@ -6,6 +6,7 @@ to start dowload package
 open terminal in vscode <br>
 MidTermV1tst to server
 ```
+cd MidTermV1tst
 cd client
 npm download
 cd ..
