@@ -12,6 +12,6 @@ node index.js
 
 cd client
 npm download
-localhost:3000/Game/ChessRoom.html
+localhost:3000/Loby
 
 ```
