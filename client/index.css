@@ -48,14 +48,24 @@
       height: 6vh;
   }
 
-  ul {
-      width: 100%;
-  }
-
   ul>li {
       list-style-type: none;
       float: left;
       width: 8.3vw;
+  }
+
+  nav form li {
+      width: 8.3vw;
+      list-style-type: none;
+  }
+
+  #logout {
+      display: inline-block;
+      background-color: #00A3FF;
+      color: #FFFFFF;
+      border-color: 0;
+      border: 0;
+      height: inherit;
   }
 
   #main_wrapper {
@@ -92,12 +102,6 @@
       margin-left: 5.4%;
       background-color: rgba(255, 255, 255, 0.9);
       height: 15vh;
-  }
-
-  #UserRoom {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
   }
 
   #UserRoom_Num {
@@ -138,7 +142,7 @@
   }
 
 
-  #wrapper form {
+  #wrapper #form_wrapper form {
       position: fixed;
       width: 90vw;
       height: 90vh;
@@ -146,14 +150,21 @@
       flex-direction: column;
       font-size: clamp(2.5rem, 3.5rem + 1vw, 5rem);
   }
-  #form_wrapper{
-    display: none;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+
+  #UserRoom {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
   }
+  #form_wrapper {
+      display: none;
+      position: fixed;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+  }
+
   #wrapper .Form_Sec {
       display: flex;
       flex-direction: column;
@@ -168,7 +179,4 @@
   #wrapper .Form_Sec>input {
       height: 15vh;
       font-size: clamp(2.5rem, 3.5rem + 1vw, 5rem);
-  }
-  #wrapper button {
-    height: 10vh;
   }

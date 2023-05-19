@@ -1,9 +1,11 @@
 *::after *::before {
   box-sizing: border-box;
 }
+
 html {
   height: 100%;
 }
+
 body {
   padding: 0;
   margin: 0;
@@ -11,6 +13,7 @@ body {
   min-height: 100vh;
   background-color: beige;
 }
+
 #root {
   display: flex;
   flex-direction: column;
@@ -29,6 +32,7 @@ body {
   position: relative;
   overflow-x: none;
 }
+
 nav {
   background-color: #a7f402d9;
   width: 100%;
@@ -40,11 +44,23 @@ ul {
   height: 100%;
 }
 
-ul > li {
+ul>li {
   list-style-type: none;
   float: left;
   width: 8.3vw;
 }
+nav form li {
+  width: 8.3vw;
+  list-style-type: none;
+}
+  #logout {
+      display: inline-block;
+      background-color: #00A3FF;
+      color: #FFFFFF;
+      border-color: 0;
+      border: 0;
+      height: inherit;
+  }
 #main_wrapper {
   display: flex;
   border: none;
@@ -55,6 +71,7 @@ ul > li {
   transition: width 0.7s ease-out;
   margin-top: 2vh;
 }
+
 main {
   /* width: 70vh; */
   width: fit-content;
@@ -62,6 +79,7 @@ main {
   background-repeat: no-repeat;
   background-color: rgba(241, 236, 236, 0.863);
 }
+
 #Back {
   display: grid;
   border-style: solid;
@@ -70,6 +88,7 @@ main {
   grid-template-rows: repeat(8, minmax(5.75vw, 9.75vh));
   z-index: -10;
 }
+
 #Front {
   display: grid;
   border-style: solid;
@@ -80,6 +99,7 @@ main {
   z-index: 10;
   background-repeat: no-repeat;
 }
+
 section {
   /* flex-basis: max(100svh,19svw); */
 
@@ -87,20 +107,25 @@ section {
   background-color: rgba(241, 236, 236, 0.863);
   backdrop-filter: blur(2px);
 }
-section > div {
+
+section>div {
   padding-left: 1em;
   float: left;
 }
+
 .ColorBlock {
   background-color: #c5b1aae1;
 }
+
 .WhiteBlocks {
   background-color: #665b5ae8;
 }
+
 .ChessPiece {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
 .MoveAble {
   background-color: green;
   box-shadow: 10px 10px;
