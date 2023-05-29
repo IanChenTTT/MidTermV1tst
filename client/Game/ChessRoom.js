@@ -1,8 +1,12 @@
-const socket = io();
+const socket = io("",{
+  path: "/Loby/Room/socket.io"
+});
+// const socket = io();
 // Get the URL qquery string
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
+
 const thisUsername = params.username;
 const thisRoom = params.room;
 // -------------------------
@@ -91,7 +95,7 @@ socket.on("drop", (target,origin,Pic,Arr) => {
   RemoveDragEvent(Orig[0]);
   AddDragEvent(Tar[0]);
   Orig[0].style.backgroundImage = `none`;
-  Tar[0].style.backgroundImage = `url(../image/${Pic}.svg)`;
+  Tar[0].style.backgroundImage = `url(/Loby/static/image/${Pic}.svg)`;
   socket.emit("UserBoardChange",Arr);
   console.log(Orig[0],Tar[0]);
 });

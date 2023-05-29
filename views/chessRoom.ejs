@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="/Loby/Room/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="/Loby/static/Game/ChessRoom.css" />
+  <!-- DOM PLACE FIRST -->
+  <!-- FRONT END -->
+  <!-- <script type="module" src="../../public/Util/EachGame.js" defer></script>
+    <script type="module" src="RoomRule.js" defer></script>  -->
+  <!-- To Back end -->
+  <script src="/Loby/static/Game/ChessRoom.js" defer></script>
+  <script src="/Loby/static/Game/Style.js" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root">
+    <nav>
+      <ul>
+        <li>首頁</li>
+        <li>對戰</li>
+        <li>紀錄</li>
+   
+        <form action="http://localhost/Loby/Logout" method="post">
+          <li style="float: right;"><button id="logout"> Logout </button></li>
+          <li style="float: right;" id="Userid">
+            <%= User.users_sid %>
+          </li>
+        </form>
+      </ul>
+    </nav>
+    <div id="main_wrapper">
+      <main>
+        <div id="Front"></div>
+        <div id="Back"></div>
+      </main>
+      <section>
+        <div id="User1">This is user 1</div>
+        <div id="User2">This is user 2</div>
+      </section>
+    </div>
+  </div>
+  <script src="../socket.io/socket.io.js"></script>
+</body>
+
+</html>

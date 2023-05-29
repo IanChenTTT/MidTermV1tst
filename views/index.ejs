@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- source  -->
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/Loby/static/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
         integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <script src="loby.js"></script>
     <title>Document</title>
 
 </head>
@@ -20,7 +21,13 @@
                 <li>首頁</li>
                 <li>對戰</li>
                 <li>紀錄</li>
-                <li style="float: right;"><button style="width: 100%;">User</button></li>
+                <form action="http://localhost/Loby/Logout" method="post">
+                    <li style="float: right;"><button id="logout" onclick="logout()"> Logout </button></li>
+                    <li style="float: right;" id="Userid">
+                        <%= User.users_sid%>
+                    </li>
+                </form>
+
             </ul>
         </nav>
         <div id="main_wrapper">
@@ -57,7 +64,7 @@
             </section>
         </div>
         <div id="form_wrapper">
-            <form action="./Game/ChessRoom.html">
+            <form action="/Loby/Room" id="EnterRoom">
                 <div class="Form_Sec">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" placeholder="Enter user name" required>
@@ -74,7 +81,7 @@
 <script>
     const InputRoom = document.querySelector("#InputRoom");
     const CreateRoom = document.querySelector("#CreateRoom");
-    const myForm = document.querySelector("form");
+    const myForm = document.querySelector("#EnterRoom");
     const formwrapper = document.querySelector("#form_wrapper")
     const label = document.querySelector("label")
     const input = document.querySelector("input")
@@ -87,9 +94,11 @@
     })
     myForm.addEventListener("mouseleave", function () {
         LeaveForm = true;
+        console.log(LeaveForm);
     })
     myForm.addEventListener("mouseenter", function () {
         LeaveForm = false;
+        console.log(LeaveForm)
     })
     window.addEventListener("click", function () {
         if (LeaveForm === true) {

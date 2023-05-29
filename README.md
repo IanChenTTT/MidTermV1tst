@@ -8,13 +8,15 @@ MidTermV1tst to server
 ```
 git clone https://github.com/IanChenTTT/MidTermV1tst.git
 cd MidTermV1tst
+cd client
+npm install
+cd ..
 
 cd server 
-npm download
-node index.js
+npm install
+filename env.example -> .env
+overwrite .env 
 
-cd client
-npm download
-localhost:3000/Game/ChessRoom.html
-
+npm run start
 ```
+After install go localhost:3000/Loby 
