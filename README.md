@@ -14,7 +14,9 @@ cd ..
 
 cd server 
 npm install
-npm run start
+filename env.example -> .env
+overwrite .env 
 
+npm run start
 ```
-After install go localhost:3000/Loby
+After install go localhost:3000/Loby 
