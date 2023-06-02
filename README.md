@@ -1,6 +1,6 @@
 # Chessanual Source Code
 ## Checkout [Chessanual](https://chess.asunal2020.com/)
-
+##ONLY VALIDATE ON COMPUTER DEVICE
 
 to start dowload package
 open terminal in vscode <br>
