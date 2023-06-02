@@ -1,5 +1,5 @@
-# MidTermV1tst
-## This is tempoprary branch
+# Chessanual Source Code
+## Checkout [Chessanual](https://chess.asunal2020.com/)
 
 
 to start dowload package
