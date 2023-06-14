@@ -323,5 +323,5 @@ class EachGame extends GameBoard {
 }
 let test = new EachGame();
 console.table(test.getGameHistory);
-console.table(test.getChess_Color);
+console.table(test.getUserColor2D());
 module.exports = EachGame;

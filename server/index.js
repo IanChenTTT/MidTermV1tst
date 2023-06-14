@@ -116,7 +116,7 @@ app.get("/Loby/",User_IsAuth,(req,res)=>{
   res.locals.User = req.session.User_info;
   res.render("index")
 })
-app.get("/Loby/Room",(req,res)=>{
+app.get("/Loby/Room",User_IsAuth,(req,res)=>{
   res.render("chessRoom",{User: req.session.User_info})
 })
 app.post("/loby/Logout", (req,res)=>{
