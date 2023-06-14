@@ -8,11 +8,15 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 });
 
 const thisUsername = params.username;
-const thisRoom = params.room;
+let thisRoomID = null;
 // -------------------------
 // Join room
-console.log(thisRoom);
-socket.emit("joinRoom", thisUsername, thisRoom);
+console.log(thisRoomID);
+
+socket.on("RoomID",(getID)=>{
+  thisRoomID = getID;
+  socket.emit("joinRoom",thisRoomID);
+});
 socket.on("WhiteORBlack", (Switcher) => {
   console.log(SpawnBoard(Switcher));
   const item = document.querySelectorAll(".CanDrag");

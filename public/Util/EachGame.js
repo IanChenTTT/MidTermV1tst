@@ -11,6 +11,7 @@ class EachGame extends GameBoard {
   #PlayerColorBoard = null;
   #PlayerTarget = [];
   #Player2Target = [];
+  #KingLocate = null;
   #PlayerMoveHistory = new DoubleLinkList();
   constructor(Iswhite) {
     super();
@@ -46,12 +47,12 @@ class EachGame extends GameBoard {
   getUserColor2D() {
     return this.#PlayerColorBoard;
   }
-  getUserColor(){
+  getUserColor() {
     return this.#Player1Color;
   }
 
   getBordColor(y, x) {
-    console.log(y,x);
+    console.log(y, x);
     return this.#PlayerColorBoard[y][x];
   }
   get getGameHistory() {
@@ -63,26 +64,39 @@ class EachGame extends GameBoard {
   get Target() {
     return this.#PlayerTarget;
   }
-  get OpponentTar(){
+  get OpponentTar() {
     return this.#Player2Target;
   }
-  setCurrentHistory(y,x,y1,x2){
+  setCurrentHistory(y, x, y1, x2) {
     let first = Object.entries(this.#CurrentGameBoard[y][x]);
     let second = Object.entries(this.#CurrentGameBoard[y1][x2]);
     let temp = first[0][0];
     let temp1 = second[0][0];
-    console.log(this.#CurrentGameBoard[y][x][temp],"Settting Board");
+    console.log(this.#CurrentGameBoard[y][x][temp], "Settting Board");
     this.#CurrentGameBoard[y1][x2][temp1] = this.#CurrentGameBoard[y][x][temp];
     this.#CurrentGameBoard[y][x][temp] = "";
     // Object.values(this.#CurrentGameBoard[y][x])="";
-
   }
-  setBoardColor(y,x,y1,x2){
+  setBoardColor(y, x, y1, x2) {
     this.#PlayerColorBoard[y1][x2] = this.#PlayerColorBoard[y][x];
     this.#PlayerColorBoard[y][x] = "";
   }
   set #Target(arg) {
     this.#PlayerTarget = arg;
+  }
+  /**
+   * @param {{ X: unsign int; Y: unign int; }} target
+   */
+  set Kinglocation(target) {
+    console.log(target);
+    if (this.#Player1Color == "W") {
+      this.#KingLocate.WhiteX = target.X;
+      this.#KingLocate.WhiteY = target.Y;
+    }
+    if (this.#Player1Color == "B") {
+      this.#KingLocate.BlackX = target.X;
+      this.#KingLocate.BlackY = target.Y;
+    }
   }
   //   conssider extreme case (0,0) (7,7) (0,7) (7,0)
   #Rooksmove(y, x) {
@@ -179,12 +193,10 @@ class EachGame extends GameBoard {
         setTimeout(() => {
           let a = Object.values(this.#CurrentGameBoard[y1][x1]);
           tempArr.push(a[0].toString());
-          if (tempArr[0] !== "" && isBlock === false){
-             isBlock = true;
-            if(tempArr[0]===this.#Player2Color)
-              Arr.push(`${y2}_${x1}`)
-          }
-          else if (isBlock === false) Arr.push(`${y2}_${x1}`);
+          if (tempArr[0] !== "" && isBlock === false) {
+            isBlock = true;
+            if (tempArr[0] === this.#Player2Color) Arr.push(`${y2}_${x1}`);
+          } else if (isBlock === false) Arr.push(`${y2}_${x1}`);
         }, 0);
       }
       for (let x2 = x - 1, y2 = y + 1; x2 >= 0 && y2 < 8; x2--, y2++) {
@@ -194,12 +206,10 @@ class EachGame extends GameBoard {
         setTimeout(() => {
           let a = Object.values(this.#CurrentGameBoard[y2][x2]);
           tempArr.push(a[0].toString());
-          if (tempArr[0] !== "" && isBlock1 === false){
-             isBlock1 = true;
-            if(tempArr[0]===this.#Player2Color)
-              Arr.push(`${y2}_${x2}`)
-          }
-          else if (isBlock1 === false) Arr.push(`${y2}_${x2}`);
+          if (tempArr[0] !== "" && isBlock1 === false) {
+            isBlock1 = true;
+            if (tempArr[0] === this.#Player2Color) Arr.push(`${y2}_${x2}`);
+          } else if (isBlock1 === false) Arr.push(`${y2}_${x2}`);
         }, 0);
       }
       for (let y3 = y - 1, x3 = x - 1; y3 >= 0 && x3 >= 0; y3--, x3--) {
@@ -208,12 +218,10 @@ class EachGame extends GameBoard {
         setTimeout(() => {
           let a = Object.values(this.#CurrentGameBoard[y3][x3]);
           tempArr.push(a[0].toString());
-          if (tempArr[0] !== "" && isBlock2 === false){
-             isBlock2 = true;
-            if(tempArr[0]===this.#Player2Color)
-              Arr.push(`${y3}_${x3}`)
-          }
-          else if (isBlock2 === false) Arr.push(`${y3}_${x3}`);
+          if (tempArr[0] !== "" && isBlock2 === false) {
+            isBlock2 = true;
+            if (tempArr[0] === this.#Player2Color) Arr.push(`${y3}_${x3}`);
+          } else if (isBlock2 === false) Arr.push(`${y3}_${x3}`);
         }, 0);
       }
       for (let y4 = y - 1, x4 = x + 1; y4 >= 0 && x4 < 8; y4--, x4++) {
@@ -222,12 +230,10 @@ class EachGame extends GameBoard {
         setTimeout(() => {
           let a = Object.values(this.#CurrentGameBoard[y4][x4]);
           tempArr.push(a[0].toString());
-          if (tempArr[0] !== "" && isBlock3 === false){
-             isBlock3 = true;
-            if(tempArr[0]===this.#Player2Color)
-              Arr.push(`${y4}_${x4}`)
-          }
-          else if (isBlock3 === false) Arr.push(`${y4}_${x4}`);
+          if (tempArr[0] !== "" && isBlock3 === false) {
+            isBlock3 = true;
+            if (tempArr[0] === this.#Player2Color) Arr.push(`${y4}_${x4}`);
+          } else if (isBlock3 === false) Arr.push(`${y4}_${x4}`);
         }, 0);
       }
       //   Queing microtask inorder send data
@@ -239,24 +245,24 @@ class EachGame extends GameBoard {
   async #Queenmove(y, x) {
     return new Promise(async (resolve) => {
       let temp = [];
-      temp.push(await this.#Bishopmove(y, x));
-      temp.push(await this.#Rooksmove(y, x));
+      let temp2 = await this.#Bishopmove(y, x);
+      temp = temp2.concat(await this.#Rooksmove(y, x));
       resolve(temp);
     });
   }
   #Kingmove(y, x) {
     return new Promise((resolve) => {
-      let temp = [];
-      for (let y1 = y - 1; y1 <= y + 1; y1++) {
-        for (let x2 = x - 1; x2 <= x + 1; x2++) {
-          setTimeout(() => {
-            if (x2 >= 0 && x2 < 8 && y1 < 8 && y1 >= 0) {
-              if (Object.values(this.#CurrentGameBoard[y1][x2]) === "")
-                temp.push(`${y1}_${x1}`);
-            }
-          }, 0);
-        }
-      }
+      let test = [];
+      // y-1 x-1
+      y - 1 >= 0 && x - 1 >= 0 ? test.push(`${y - 1}_${x - 1}`) : null;
+      y - 1 >= 0 ? test.push(`${y - 1}_${x}`) : null;
+      y - 1 >= 0 && x + 1 < 8 ? test.push(`${y - 1}_${x + 1}`) : null;
+      x - 1 >= 0 ? test.push(`${y}_${x - 1}`) : null;
+      x + 1 < 8 ? test.push(`${y}_${x + 1}`) : null;
+      y + 1 < 8 && x - 1 >= 0 ? test.push(`${y + 1}_${x - 1}`) : null;
+      y + 1 < 8 ? test.push(`${y + 1}_${x}`) : null;
+      y + 1 < 8 && x + 1 < 8 ? test.push(`${y + 1}_${x + 1}`) : null;
+      resolve(test);
       setTimeout(() => {
         resolve(temp);
       }, 0);
@@ -266,12 +272,10 @@ class EachGame extends GameBoard {
     return new Promise((resolve) => {
       let test = [];
 
-      if (y -1 < 8) 
-        test.push(`${y-1}_${x}`);
-      if(y - 2 < 8)
-          test.push(`${y-2}_${x}`);
+      if (y - 1 < 8) test.push(`${y - 1}_${x}`);
+      if (y - 2 < 8) test.push(`${y - 2}_${x}`);
       console.log(test);
-      resolve(test)
+      resolve(test);
     });
   }
   //   spread syntax!!!
@@ -304,18 +308,17 @@ class EachGame extends GameBoard {
         break;
     }
     // ex: [ '5_0', '6_3', '5_2' ] string[0] string [2]
-    let holder2 = [] ;
-    let holder3 = []
-     holder.forEach(value => {
+    let holder2 = [];
+    let holder3 = [];
+    holder.forEach((value) => {
       let Player2y = 7 - value[0];
       let Player2x = 7 - value[2];
-      let player2 = `${Player2y}_${Player2x}`
-      if(this.#PlayerColorBoard[value[0]][value[2]] !== this.#Player1Color)
-        {
+      let player2 = `${Player2y}_${Player2x}`;
+      if (this.#PlayerColorBoard[value[0]][value[2]] !== this.#Player1Color) {
         holder2.push(value);
-        holder3.push(player2)
-        }
-    });  
+        holder3.push(player2);
+      }
+    });
     this.#PlayerTarget = holder2;
     this.#Player2Target = holder3;
     return holder2;
